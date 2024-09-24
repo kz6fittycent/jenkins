@@ -58,7 +58,7 @@ parts:
       - python3-requests #for API usage
     
     override-build: |
-      curl -sLO https://mirrors.jenkins.io/war/2.440/jenkins.war
+      curl -sLO https://mirrors.jenkins.io/war/"'$SNAPCRAFT_PROJECT_VERSION'"/jenkins.war
       mv jenkins.war $CRAFT_PART_INSTALL
 
   config:
