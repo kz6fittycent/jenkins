@@ -36,7 +36,7 @@ apps:
       XDG_DATA_HOME: "$SNAP/usr/share"
       FONTCONFIG_PATH: "$SNAP/etc/fonts"
       JAVA_HOME: "$SNAP/usr/lib/jvm/java-17-openjdk"
-      LD_LIBRARY_PATH: "$SNAP/usr/lib/${SNAPCRAFT_ARCH_TRIPLET}"
+      LD_LIBRARY_PATH: "$SNAP/usr/lib/${CRAFT_ARCH_TRIPLET_BUILD_FOR}"
     command: launch            
     daemon: simple
   config:
@@ -60,14 +60,7 @@ parts:
     
     override-build: |
       curl -sLO http://mirrors.jenkins.io/war/latest/jenkins.war
-      mv $CRAFT_PART_INSTALL/usr/lib/jvm/java-17-openjdk-* $CRAFT_PART_INSTALL/usr/lib/jvm/java-17-openjdk
-      rm $CRAFT_PART_INSTALL/usr/lib/jvm/java-17-openjdk/lib/security/cacerts
-      cp /etc/ssl/certs/java/cacerts $CRAFT_PART_INSTALL/usr/lib/jvm/java-17-openjdk/lib/security/cacerts
-      cp /etc/ssl/certs/java/cacerts $CRAFT_PART_INSTALL/etc/ssl/certs/java/cacerts
       mv jenkins.war $CRAFT_PART_INSTALL
-    prime:
-      - -usr/lib/jvm/java-17-openjdk-*/lib/security/blacklisted.certs
-      - -usr/lib/jvm/java-11-openjdk-*/lib/security/blacklisted.certs
 
   config:
     plugin: dump
