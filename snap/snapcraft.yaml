@@ -15,14 +15,20 @@ license: MIT
 icon: snap/local/jenkins.png
 version: '2.478'
 
-base: core22
+base: core24
 confinement: classic
 grade: stable
 
-architectures:
-  - build-on: amd64
-  - build-on: arm64
-  - build-on: armhf
+platforms:
+  amd64:
+    build-on: [amd64]
+    build-for: [amd64]
+  arm64:
+    build-on: [arm64]
+    build-for: [arm64]
+  armhf:
+    build-on: [armhf]
+    build-for: [armhf]
 
 apps:
   jenkins:
@@ -75,9 +81,9 @@ parts:
       - jenkins
     plugin: nil
     build-snaps: 
-      - core22
+      - core24
     override-prime: |
       set -eux
-      for snap in "core22"; do  # List all content-snaps and base snaps you're using here
+      for snap in "core24"; do  # List all content-snaps and base snaps you're using here
         cd "/snap/$snap/current" && find . -type f,l -exec rm -f "$CRAFT_PRIME/{}" \;
       done
