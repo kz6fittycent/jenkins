@@ -59,6 +59,7 @@ parts:
     
     override-build: |
       curl -sLO https://mirrors.jenkins.io/war/2.440/jenkins.war
+      mv $CRAFT_PART_INSTALL/usr/lib/jvm/java-17-openjdk-* $CRAFT_PART_INSTALL/usr/lib/jvm/java-17-openjdk
       mv jenkins.war $CRAFT_PART_INSTALL
 
   config:
